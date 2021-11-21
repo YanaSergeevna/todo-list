@@ -48,8 +48,7 @@ module.exports = {
               'css-loader',
               'sass-loader?indentedSyntax'
             ]
-          },
-          // other vue-loader options go here
+          }
         }
       },
       {
@@ -63,6 +62,11 @@ module.exports = {
         options: {
           name: '[name].[ext]?[hash]'
         }
+      },
+      {
+        test: /\.js$/, // Check for all js files
+        exclude: /node_modules\/(?!(dom7|swiper)\/).*/,
+        loader: 'babel-loader'
       }
     ]
   },
