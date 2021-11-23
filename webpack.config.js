@@ -84,6 +84,7 @@ module.exports = {
   performance: {
     hints: false
   },
+  entry: ["regenerator-runtime/runtime.js", "./src/main.js"],
   devtool: '#eval-source-map'
 }
 

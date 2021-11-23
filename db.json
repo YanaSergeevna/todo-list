@@ -1,24 +1,28 @@
 {
-    "todos": [
-      {
-        "id": 0,
-        "name": "Go to the gym",
-        "done": false
-      },
-      {
-        "id": 1,
-        "name": "Walk the dog",
-        "done": false
-      },
-      {
-        "id": 2,
-        "name": "Get some pizza",
-        "done": false
-      },
-      {
-        "name": "Finish this project",
-        "id": 3,
-        "done": false
-      }
-    ]
-  }
+  "todos": [
+    {
+      "id": 0,
+      "name": "Go to the gym",
+      "done": false,
+      "date": "2021-11-23T00:00:00.000Z"
+    },
+    {
+      "id": 1,
+      "name": "Go to the forest",
+      "done": false,
+      "date": "2021-11-23T00:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "name": "Go to the museum",
+      "done": false,
+      "date": "2021-11-24T00:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "name": "Go to the park",
+      "done": false,
+      "date": "2021-11-25T00:00:00.000Z"
+    }
+  ]
+}

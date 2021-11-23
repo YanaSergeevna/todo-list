@@ -1,10 +1,13 @@
 <template>
+    <div class="container o-todo-month">
+        <!-- 
     <div v-swiper:mySwiper="swiperOptions" class="m-month-container column-swiper">
+        
         <div class="swiper-wrapper" >
             <m-list-item
-                v-for="(day, index) in daysObj"
+                v-for="(date, index) in daysObj"
                 :key="'Day'+ index"
-                :day="day"
+                :dateIso="date"
                 :indexDay="index"
                 :hasToday="hasToday"
                 :selectedMonth="selectedMonth"
@@ -12,17 +15,47 @@
                 class="m-day-item swiper-slide"
             >
             </m-list-item>
-        </div>
+        
         <a-slider-navigation 
             class="column-slider-navigation"
             @showResolved="showResolvedItem"
         ></a-slider-navigation>
+        </div>
     </div>
+        -->
+        <div class="m-month-grid">
+            <m-list-item
+                v-for="(date, index) in daysObj"
+                :key="'Day'+ index"
+                :dateIso="date"
+                :indexDay="index"
+                :hasToday="hasToday"
+                :selectedMonth="selectedMonth"
+                :showResolved="showResolved"
+                class="m-day-item"
+            />
+        </div>
+        
+        <a-navigation
+            @showResolved="showResolvedItem"
+        ></a-navigation>
+        <!-- 
+        <a-slider-navigation 
+            class="column-slider-navigation"
+            @showResolved="showResolvedItem"
+        ></a-slider-navigation>
+        -->
+    </div>
+    
 </template>
 <script>
-    import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
+    
+    //import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
     import ToDoListItem from "../atoms/todo-list-item.vue";
-    import ToDoSliderNavigation from "../atoms/todo-slider-navigation.vue";
+    import ToDoNavigation from "../atoms/todo-navigation.vue";
+    //import ToDoSliderNavigation from "../atoms/todo-slider-navigation.vue";
+
+    
 
     export default {
         name: 'todo-list-grid',
@@ -39,29 +72,31 @@
         },
         data: () => ({
             showResolved: false,
-            swiperOptions: {
-                slidesPerView: 1,
-                slidesPerGroup:1,
-                allowTouchMove: false,
-                navigation: {
-                    nextEl: '.column-swiper-button-next',
-                    prevEl: '.column-swiper-button-prev'
-                },
-                breakpoints: {
-                    1440: {
-                        slidesPerView: 4,
-                        slidesPerGroup:4,
-                    },
-                    992: {
-                        slidesPerView: 3,
-                        slidesPerGroup:3,
-                    },
-                    640: {
-                        slidesPerView: 2,
-                        slidesPerGroup:2,
-                    }
-                }
-            }
+            //todos: [],
+            //tasksbyDate: [],
+            // swiperOptions: {
+            //     slidesPerView: 1,
+            //     slidesPerGroup:1,
+            //     allowTouchMove: false,
+            //     navigation: {
+            //         nextEl: '.column-swiper-button-next',
+            //         prevEl: '.column-swiper-button-prev'
+            //     },
+            //     breakpoints: {
+            //         1440: {
+            //             slidesPerView: 4,
+            //             slidesPerGroup:4,
+            //         },
+            //         992: {
+            //             slidesPerView: 3,
+            //             slidesPerGroup:3,
+            //         },
+            //         640: {
+            //             slidesPerView: 2,
+            //             slidesPerGroup:2,
+            //         }
+            //     }
+            // }
         }),
         mounted() {
         },
@@ -72,36 +107,49 @@
                 } else {
                     this.showResolved = false
                 }
-            }
+            },
+            // dataProcessing(data) {
+            //     let days = this.daysObj,
+            //         tasks = [],
+            //         monthDay = "";
+            //     for(var  i = 1; i < days.length; i++) {
+            //         monthDay = ((days[i])[0]).slice(0, 10);
+            //         tasks = data.filter( day => ((day.date).slice(0, 10)) === monthDay);
+            //         this.tasksbyDate.push(tasks)
+            //     }
+            // }
         },
         computed: {
-            swiper() {
-                return this.$refs.mySwiper.$swiper
-            }
+            //swiper() {
+                //return this.$refs.mySwiper.$swiper
+            //}
         },
         components: {
             "m-list-item": ToDoListItem,
-            'a-slider-navigation': ToDoSliderNavigation,
-            Swiper,
-            SwiperSlide
+            'a-navigation': ToDoNavigation,
+            //Swiper,
+            //SwiperSlide
         },
         directives: {
-            swiper: directive
+            //swiper: directive
         }
   };
 </script>
 <style scoped lang="scss">
-   .column-slider-navigation {
-       position: relative;
-       display: flex;
-       justify-content: space-between;
-   }
-   .swiper-wrapper .m-day-item:last-child {
-       &::after {
-           display: none;
-       }
-   }
-   .m-month-container {
-       max-width: 100%;
-   }
+    .m-month-container {
+        max-width: 100%;
+    }
+    .o-todo-month {
+        flex: 1;
+        overflow: hidden;
+    }
+    .m-month-grid {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        overflow: hidden;
+        overflow: auto;
+    }
 </style>

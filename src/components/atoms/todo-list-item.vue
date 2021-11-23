@@ -5,29 +5,30 @@
           Today
         </div>
         <div class="list-item-header__day" v-else>
-          {{weekDays[day.weekDay]}}<span class="date">{{day.day}}.{{selectedMonth + 1}}</span>
+          {{weekDay}}<span class="date">{{date}}.{{selectedMonth}}</span>
         </div>
       </div>
       <ul class="a-items-list">
-        <draggable 
-        v-model="tasks" 
+        <draggable
+        v-if="tasksbyDate.length > 0"
+        v-model="tasksbyDate" 
         :options="{group:'people'}"
         @start="drag=true" 
         @end="drag=false"
         class="list-group"
         ghost-class="ghost"
-        @click.native.self="createElem()"
-        @add="afterDropItem"
         >
+
           <a-todo-elem 
-                v-for="(task, index) in tasks" 
-                :key="'task'+index"
+                v-for="(task, index) in tasksbyDate"
                 :task="task"
-                :index="index"
+                :key="'task'+index"
                 @changeTask="changeTask"
                 @removeItem="removeItem"
                 class="drag-item"
           />
+          <!--
+          
           <li class="a-resolved-item" 
             v-if="showResolved">
             <a-todo-resolved-elem
@@ -39,7 +40,9 @@
             @removeItem="removeItem"
             />
           </li>
+          -->
         </draggable>
+        <!--
         <a-create-todo-elem
             class="a-create-elem"
             v-if="createItemShow"
@@ -50,31 +53,31 @@
               createItemFocus ? 'active' : ''
             ]"
           />
+          -->
       </ul>
   </li>
 </template>
 <script>
+  import 'regenerator-runtime/runtime'
+  import axios from "axios";
   import ToDoElem from "./todo-elem.vue";
   import ToDoResolvedElem from "./todo-resolved-item.vue";
   import CreateTodoElem from "./create-todo-elem.vue";
   
   import draggable from 'vuedraggable'
 
-  
+  const baseURL = "http://localhost:3001/todos";
 
   export default {
     name: 'todo-list-item',
     props: {
-        day: {
-          type: Object
+        dateIso: {
+          type: Array
         },
         hasToday: {
           type: Boolean
         },
         indexDay: {
-          type: Number
-        },
-        selectedMonth: {
           type: Number
         },
         selectedMonth: {
@@ -86,19 +89,29 @@
     },
     data: () => ({
         weekDays: [
+          'Sunday',
           'Monday',
           'Tuesday',
           'Wednesday',
           'Thursday',
           'Friday',
-          'Saturday',
-          'Sunday'
+          'Saturday'
         ],
-        tasks: [],
+        date: '',
+        weekDay: '',
         createItemShow: false,
         createItemFocus: false,
-        resolved: []
+        resolved: [],
+        tasksbyDate: []
     }),
+    async created() {
+        try {
+            const res = await axios.get(baseURL);
+            this.dataProcessing(res.data)
+        } catch (e) {
+            console.error(e);
+        }
+    },
     mounted:function(){
     },
     methods: {
@@ -107,20 +120,20 @@
       },
       addedValue(value) {
         if(value != "") {
-          this.tasks.push(value.trim())
+          //this.tasks.push(value.trim())
         }
-        if(this.tasks.length > 0) { 
-          this.createItemFocus = true
-        } else {
-          this.createItemFocus = false
-        }
+        //if(this.tasks.length > 0) { 
+          //this.createItemFocus = true
+        //} else {
+          //this.createItemFocus = false
+        //}
       },
       blurElem() {
         this.createItemShow = false;
       },
       changeTask(value, index, status) {
         if(status == 'active') {
-          this.tasks[index] = value.trim()
+          //this.tasks[index] = value.trim()
         } else {
           this.resolved[index]  = value.trim()
         }
@@ -128,16 +141,23 @@
       removeItem(index, status) {
         setTimeout(()=>{
           if(status == 'active') {
-            this.resolved.push(this.tasks[index])
+            //this.resolved.push(this.tasks[index])
           } else {
-            this.tasks.push(this.resolved[index])
+            ///this.tasks.push(this.resolved[index])
           }
         },1000)
-          // let resolvedTask = this.tasks.splice(index, 1)
-          // this.resolved = this.resolved.concat(resolvedTask);
       },
-      afterDropItem(event) {
-        console.log(event)
+      dataProcessing(data) {
+        let day = new Date(this.dateIso),
+            monthDay = ((this.dateIso)[0]).slice(0, 10),
+            tasks = '';
+        this.date = day.getDate();
+        this.weekDay = this.weekDays[day.getDay()];
+
+        tasks = data.filter( day => ((day.date).slice(0, 10)) === monthDay);
+        if(tasks.length > 0) {
+          this.tasksbyDate = tasks;
+        }
       }
     },
     components: {
@@ -153,17 +173,10 @@
         position: relative;
         padding: 10px;
         list-style-type: none;
-        &:after {
-          content: "";
-          position: absolute;
-          top: 50%;
-          right: 0;
-          width: 2px;
-          height: 90%;
-          background: rgb(255,255,255);
-          background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(244,188,159,1) 20%, rgba(244,188,159,1) 80%, rgba(255,255,255,1) 100%);
-          transform: translate(0, -50%);
-        }
+        background: #6495ed90;
+        width: calc(30% - 30px);
+        flex-shrink: 0;
+        margin: 15px;
     }
     .list-item-header {
       text-align: center;
@@ -173,7 +186,7 @@
         justify-content: center;
         .date {
           position: absolute;
-          top: 0;
+          top: 10px;
           right: 10px;
           font-size: 14px;
           color: #F4BC9F;
@@ -189,24 +202,11 @@
         } 
       }
     }
-    // .a-items-list {
-    //   position: relative;
-    //   &:before {
-    //     content: "";
-    //     position: absolute;
-    //     top: calc(100% + 10px);
-    //     left: 50%;
-    //     width: 20px;
-    //     height: 20px;
-    //     background: url("/images/plus.svg") center/cover;
-    //     z-index: 1;
-    //     display: none;
-    //   }
-    // }
     .a-items-list {
       display: flex;
       flex-direction: column;
-      height: calc(100% - 35px);
+      height: 90%;
+      padding: 0;
       .list-group {
         flex-grow: 1;
       }
@@ -238,5 +238,9 @@
         textarea {
           cursor: move;
         }
+    }
+    .list-item-header__today,
+    .list-item-header__day {
+      color: #ffffff;
     }
 </style>

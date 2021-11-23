@@ -46,7 +46,7 @@
             },
             saveValue() {
                 if(this.task != "") {
-                    this.$emit('changeTask', this.task, this.index, 'resolved')
+                    //this.$emit('changeTask', this.task, this.index, 'resolved')
                 } else {
                     this.show = false
                 }
@@ -81,38 +81,6 @@
     }
 </script>
 <style scoped lang="scss">
-    .a-todo-elem {
-        position: relative;
-        list-style-type: none;
-        display: flex;
-        justify-content: flex-start;
-    }
-    .a-todo-elem__circle {
-        position: relative;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        flex-shrink: 0;
-        border: 2px solid #cecece;
-        margin: 5px 10px 0 0;
-        cursor: pointer;
-        &.active {
-            border-color: green;
-            &:after {
-                content: "";
-                position: absolute;
-                top: 3px;
-                left: 3px;
-                width: 10px;
-                height: 10px;
-                border-radius: 50%;
-                background: green;
-            }
-        }
-    }
-    .a-todo-elem__circle.active + .form-field {
-        opacity: .5;
-    }
     textarea {
         border: none;
         padding: 0;
