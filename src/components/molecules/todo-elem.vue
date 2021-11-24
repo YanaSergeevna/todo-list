@@ -66,7 +66,12 @@
                 this.$emit('removeItem', this.task.id)  
             },
             rewriteTask() {
-                this.$emit('rewriteTask', this.task.name, this.task.id, )  
+                let newValue = this.task.name.trim()
+                if(newValue == '') {
+                    this.removeItem()
+                } else {
+                    this.$emit('rewriteTask', newValue, this.task.id, )
+                }
             },
             showPriorityPopup() {
                 this.priorityShow ? this.priorityShow = false  : this.priorityShow = true

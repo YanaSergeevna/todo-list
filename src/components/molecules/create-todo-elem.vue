@@ -9,8 +9,7 @@
             ]" 
         rows="1" 
         v-model="issueContent" 
-        @blur.native="checkTextarea"
-        @change.native="passValue"
+        @blur.native="passValue"
         />
   </li>
 </template>
@@ -18,32 +17,27 @@
 export default {
     name: 'todo-elem',
     props: {
-        focusField: {
-            typeof: Boolean
-        },
         indexDay: {
-            typeof: Number
+            type: Number
         }
     },
     data: () => ({
         issueContent: '',
         filledField: false,
     }),
-    mounted:function(){
+    mounted() {
         document.querySelector('.field'+this.indexDay).focus()
     },
     methods: {
-        checkTextarea(e) {
-            if(this.issueContent != '') {
-                this.filledField = true;
-            } else {
-                this.filledField = false;
-                this.$emit("createItemShow", false);
-            }
-        },
         passValue(evt) {
-            this.$emit("added-value", this.issueContent);
-            this.issueContent = '';
+            let newValue = this.issueContent.trim()
+            if(this.issueContent == '') {
+                this.$emit('showCreateElem', false)
+            } else {
+                this.$emit("added-value", newValue);
+                this.$emit('showCreateElem', false)
+                this.issueContent = '';
+            }
         }
     }
   }
