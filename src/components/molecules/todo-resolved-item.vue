@@ -1,30 +1,35 @@
 <template>
 <transition name="slide-fade">
-    <div class="a-todo-elem"  v-if="show">
-        <label :class="['a-todo-elem__circle active', priority ]"
+    <div 
+        :class="[
+            'm-todo-elem',
+            task.done ? 'active' : '' 
+        ]"
+        v-show="task.done">
+        <label class="m-todo-elem__circle active"
             @click="checkItem">
         </label>
         <TextareaAutosize
-            :min-height="30"
-            :max-height="350"
+            :min-height="20"
             class="form-field field" 
             rows="1" 
-            v-model="task"
-            @blur.native="saveValue()"
+            v-model="task.name"
+            disabled="disabled"
         />
-        <a-add-priority
-       @choisePriority="addedPriority"
-       />
+        <div class="todo-elem-navigation">
+            <div class="remove-elem-btn" @click="removeItem">
+                <img src="../../assets/close.svg" alt="">
+            </div>
+        </div>
     </div>
 </transition>
 </template>
 <script>
-    import AddPriority from "./todo-add-priority.vue";
     export default {
         name: 'todo-resolved-item',
         props: {
             task: {
-                typeof: String
+                typeof: Object
             },
             index: {
                 typeof: Number
@@ -41,15 +46,10 @@
             checkItem(e) {
                 let elem = e.target;
                 elem.classList.remove('active')
-                this.show = false;
-                this.$emit('removeItem', this.index, 'resolved')
+                this.$emit('checkThisTask',  this.task.id, 'return')
             },
-            saveValue() {
-                if(this.task != "") {
-                    //this.$emit('changeTask', this.task, this.index, 'resolved')
-                } else {
-                    this.show = false
-                }
+            removeItem() {
+                this.$emit('removeItem', this.task.id)  
             },
             addedPriority(color, index) {
                 this.priorityColor = color
@@ -73,31 +73,11 @@
             
             }
 
-        },
-        components: {
-            'a-add-priority': AddPriority
         }
      
     }
 </script>
 <style scoped lang="scss">
-    textarea {
-        border: none;
-        padding: 0;
-        height: auto;
-        width: 100%;
-        font-size: 14px;
-        resize: none;
-        overflow: hidden;
-        padding: 5px 0;
-        border-bottom: 1px solid #F4BC9F;
-        &:focus {
-            outline: none;
-        }
-    }
-    .filled-field {
-        border-bottom: 1px solid #F4BC9F;
-    }
     .slide-fade-enter-active {
         transition: all .3s ease;
     }
@@ -108,5 +88,9 @@
         transform: translateX(10px);
         opacity: 0;
     }
+    textarea {
+        text-decoration: line-through;
+    }
+    
         
 </style>

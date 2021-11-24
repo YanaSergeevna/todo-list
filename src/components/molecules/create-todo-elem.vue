@@ -1,8 +1,7 @@
 <template>
-  <li class="a-todo-elem">
-        <label class="a-todo-elem__circle"></label>
+  <li class="m-todo-elem">
+        <label class="m-todo-elem__circle"></label>
         <TextareaAutosize
-        :max-height="350"
         :class="[
                 'field'+indexDay,
                 'js-autoresize',
@@ -16,7 +15,6 @@
   </li>
 </template>
 <script>
-import AddPriority from "./todo-add-priority.vue";
 export default {
     name: 'todo-elem',
     props: {
@@ -46,13 +44,12 @@ export default {
         passValue(evt) {
             this.$emit("added-value", this.issueContent);
             this.issueContent = '';
-            evt.path[0].style.height = "auto";
         }
-    },
-    components: {
-        'a-add-priority': AddPriority
     }
   }
 </script>
-<style scoped lang="scss">     
+<style scoped lang="scss">
+    .m-todo-elem.a-create-elem {
+        margin: 0;
+    } 
 </style>

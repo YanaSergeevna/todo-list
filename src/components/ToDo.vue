@@ -35,13 +35,15 @@
             calendar(year, month) {
                 let lastDay = new Date(year,month+1,0).getDate(),
                     lastDate = new Date(year,month,lastDay);
+                
 
-                this.selectedMonth = lastDate.getMonth();
+                this.selectedMonth = month;
                 this.daysObj = [];
                 this.hasToday =  false;
 
                 for(var  i = 1; i <= lastDay; i++) {
-                    let isoDay = (new Date(year, month, i).toISOString());
+                    let isoDay = (new Date(year, month, i+1).toISOString());
+                    
                     if (i == new Date().getDate() && lastDate.getFullYear() == new Date().getFullYear() && lastDate.getMonth() == new Date().getMonth()) {
                         this.daysObj = [];
                         this.hasToday = true;

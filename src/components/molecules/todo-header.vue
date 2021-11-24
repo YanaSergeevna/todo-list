@@ -52,7 +52,7 @@
                     if (monthSelectedIndex != 0) {
                          select.selectedIndex = monthSelectedIndex - 1
                     } else {
-                        select.selectedIndex = 11   ;
+                        select.selectedIndex = 11;
                         yearValue = Number(yearValue) - 1;
                     }
                 } else if (direction == 'next') {
