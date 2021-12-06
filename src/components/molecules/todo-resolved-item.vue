@@ -7,7 +7,7 @@
         ]"
         v-show="task.done">
         <label class="m-todo-elem__circle active"
-            @click="checkItem">
+            @click="checkThisTask">
         </label>
         <TextareaAutosize
             :min-height="20"
@@ -25,6 +25,7 @@
 </transition>
 </template>
 <script>
+    import {mapMutations} from 'vuex';
     export default {
         name: 'todo-resolved-item',
         props: {
@@ -43,34 +44,19 @@
         mounted:function(){
         },
         methods: {
-            checkItem(e) {
-                let elem = e.target;
+            ...mapMutations(["removeTask", "updateTask", "checkTask"]),
+            checkThisTask(e) {
+                let elem = e.target,
+                    checkedTask = {
+                        id: this.task.id,
+                        done: false
+                    }
                 elem.classList.remove('active')
-                this.$emit('checkThisTask',  this.task.id, 'return')
+                
+                this.checkTask(checkedTask)
             },
             removeItem() {
-                this.$emit('removeItem', this.task.id)  
-            },
-            addedPriority(color, index) {
-                this.priorityColor = color
-                switch (index) {
-                case 0:
-                      this.priority = 'hight-priority'
-                      this.priorityLabel = "!!!"
-                    break;
-                case 1:
-                      this.priority = 'medium-priority'
-                      this.priorityLabel = "!!"
-                    break;
-                case 2:
-                    this.priority = 'low-priority'
-                    this.priorityLabel = "!"
-                    break;
-                default:
-                    this.priority = ''
-                    break;
-                }
-            
+                this.removeTask(this.task.id)
             }
 
         }

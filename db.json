@@ -1,55 +1,32 @@
 {
   "todos": [
     {
-      "id": 0,
-      "name": "Go to the gymew",
-      "done": true,
-      "date": "2021-11-23T00:00:00.000Z",
-      "priority": "low"
-    },
-    {
-      "id": 1,
-      "name": "task 1",
-      "done": false,
-      "date": "2021-11-26T22:00:00.000Z",
-      "priority": "medium"
-    },
-    {
-      "name": "task2",
-      "date": [
-        "2021-11-23T22:00:00.000Z"
-      ],
-      "id": 4,
-      "priority": "hight"
-    },
-    {
-      "name": "task3",
-      "date": [
-        "2021-11-23T22:00:00.000Z"
-      ],
-      "id": 5,
-      "priority": "medium"
-    },
-    {
-      "name": "task 3",
-      "date": "2021-11-26T22:00:00.000Z",
-      "done": false,
-      "priority": "hight",
-      "id": 6
-    },
-    {
-      "name": "tdsk 8\nуфзофзцщмьц\nфцмжьфцжмщфцьщм\nklnklm",
-      "date": "2021-11-25T22:00:00.000Z",
-      "done": false,
-      "priority": "hight",
-      "id": 7
-    },
-    {
-      "name": "dgxhgdx",
-      "date": "2021-11-26T22:00:00.000Z",
+      "name": "task1",
+      "date": "2021-11-29T22:00:00.000Z",
       "done": false,
       "priority": "low",
-      "id": 8
+      "id": 1
+    },
+    {
+      "name": "task 2",
+      "date": "2021-11-29T22:00:00.000Z",
+      "done": false,
+      "priority": "hight",
+      "id": 2
+    },
+    {
+      "name": "task4",
+      "date": "2021-11-30T22:00:00.000Z",
+      "done": false,
+      "priority": "hight",
+      "id": 3
+    },
+    {
+      "name": "task 5",
+      "date": "2021-11-30T22:00:00.000Z",
+      "done": false,
+      "priority": "low",
+      "id": 4
     }
   ]
 }

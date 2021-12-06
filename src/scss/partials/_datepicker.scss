@@ -1,0 +1,10 @@
+.vdp-datepicker__calendar .cell {
+    color: #000000;
+}
+.vdp-datepicker__calendar {
+    top: 40px;
+    right: 100%;
+}
+.vdp-datepicker__calendar header .prev:not(.disabled), .vdp-datepicker__calendar header .next:not(.disabled), .vdp-datepicker__calendar header .up:not(.disabled) {
+    color: #000000;
+}

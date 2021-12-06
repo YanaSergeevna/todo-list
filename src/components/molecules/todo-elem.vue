@@ -32,7 +32,6 @@
         <transition name="slide"> 
             <a-priority-popup 
                 v-if="priorityShow"
-                @choisePriority="choisePriority"
                 :id="task.id"
             />
         </transition>
@@ -40,11 +39,9 @@
 </transition>
 </template>
 <script>
-    import axios from "axios";
     import AddPriority from "../atoms/todo-add-priority.vue";
     import PriorityPopup from "../atoms/todo-priority-popup.vue";
-
-    const baseURL = "http://localhost:3001/todos";
+    import {mapMutations} from 'vuex';
 
     export default {
         name: 'todo-elem',
@@ -58,34 +55,32 @@
         mounted:function(){
         },
         methods: {
-            checkThisTask(e) {
-                this.$emit('checkThisTask', this.task.id, 'done')
-                this.show = false
-            },
+             ...mapMutations(["removeTask", "updateTask", "checkTask"]),
             removeItem() {
-                this.$emit('removeItem', this.task.id)  
+                this.removeTask(this.task.id)
             },
             rewriteTask() {
-                let newValue = this.task.name.trim()
-                if(newValue == '') {
-                    this.removeItem()
-                } else {
-                    this.$emit('rewriteTask', newValue, this.task.id, )
+                let newValue = {
+                    id: this.task.id,
+                    value: this.task.name.trim()
                 }
+                if(newValue.value == '') {
+                    this.removeItem(this.task.id)
+                } else {
+                    this.updateTask(newValue)
+                }
+            },
+            checkThisTask() {
+                let checkedTask = {
+                    id: this.task.id,
+                    done: true
+                }
+                this.checkTask(checkedTask)
+                this.show = false
             },
             showPriorityPopup() {
                 this.priorityShow ? this.priorityShow = false  : this.priorityShow = true
-            },
-            async choisePriority(id, status) {
-                try {
-                    await axios.patch(`${baseURL}/${id}`, {
-                        priority: status
-                    });
-                    console.log(this.task)
-                    this.task.priority = status
-                    } catch (e) {
-                }
-            },
+            }
         },
         components: {
             'a-add-priority': AddPriority,

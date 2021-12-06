@@ -1,0 +1,26 @@
+.o-todo-month .ps {
+    height: 100%;
+}
+.ps {
+    &__thumb-y,
+    &__thumb-x {
+        right: 0px;
+        width: 6px;
+        background: #012644;
+    }
+    &--active-x > &__rail-x, 
+    &--active-y > &__rail-y {
+        background-color: #ecf0f590;
+        opacity: .6;
+    }
+    &--active-y > &__rail-y {
+        width: 6px;
+    }
+    &--active-x > &__rail-x {
+        border-radius: 10px;
+    }
+    &__thumb-x {
+        height: 15px;
+        bottom: 0;
+    }
+}

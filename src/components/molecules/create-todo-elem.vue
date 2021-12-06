@@ -2,11 +2,7 @@
   <li class="m-todo-elem">
         <label class="m-todo-elem__circle"></label>
         <TextareaAutosize
-        :class="[
-                'field'+indexDay,
-                'js-autoresize',
-                filledField ? 'filled-field' : ''
-            ]" 
+        :class="['field'+indexDay]" 
         rows="1" 
         v-model="issueContent" 
         @blur.native="passValue"
@@ -14,11 +10,16 @@
   </li>
 </template>
 <script>
+import {mapMutations, mapGetters} from 'vuex';
+  
 export default {
     name: 'todo-elem',
     props: {
         indexDay: {
             type: Number
+        },
+        dateIso: {
+            type: String
         }
     },
     data: () => ({
@@ -28,14 +29,26 @@ export default {
     mounted() {
         document.querySelector('.field'+this.indexDay).focus()
     },
+    computed: {
+        ...mapGetters(["allTasksLength"])
+    },
     methods: {
-        passValue(evt) {
-            let newValue = this.issueContent.trim()
+        ...mapMutations(["createTask"]),
+        passValue() {
+            let newValue = this.issueContent.trim(),
+                newObj= { 
+                    id: new Date().valueOf(),
+                    name: newValue, 
+                    date: this.dateIso, 
+                    done: false, 
+                    priority: "normal" 
+                }
             if(this.issueContent == '') {
                 this.$emit('showCreateElem', false)
             } else {
-                this.$emit("added-value", newValue);
+                this.createTask(newObj)
                 this.$emit('showCreateElem', false)
+                this.tasks
                 this.issueContent = '';
             }
         }

@@ -1,16 +1,19 @@
 <template>
     <div class="container o-todo-month">
-        <div class="m-month-grid">
-            <m-list-item
-                v-for="(date, index) in daysObj"
-                :key="'Day'+ index"
-                :dateIso="date"
-                :indexDay="index"
-                :hasToday="hasToday"
-                :selectedMonth="selectedMonth"
-                class="m-day-item"
-            />
-        </div>
+        <perfect-scrollbar id="scroll-container">
+            <div class="m-month-grid" >
+                <m-list-item
+                    v-for="(date, index) in daysObj"
+                    :key="'Day'+ index"
+                    :id="'Day'+ index"
+                    :dateIso="date"
+                    :indexDay="index"
+                    :hasToday="hasToday"
+                    :selectedMonth="selectedMonth"
+                    class="m-day-item"
+                />
+            </div>
+        </perfect-scrollbar>
     </div>
     
 </template>
@@ -48,15 +51,13 @@
     }
     .o-todo-month {
         flex: 1;
-        overflow: hidden;
+        width: 100%;
     }
     .m-month-grid {
         width: 100%;
         height: 100%;
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start;
         align-items: flex-start;
-        overflow: hidden;
-        overflow: auto;
     }
 </style>

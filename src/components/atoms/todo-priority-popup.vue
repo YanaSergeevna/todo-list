@@ -3,7 +3,7 @@
         <li 
             v-for="(item, index) in priorities" 
             :key="'Priority'+index"
-            @click="choisePriority(id, item.priority)"
+            @click="choisePriority(item.priority)"
             :class="['a-priority-item', item.priority]"
         >
         {{item.name}}
@@ -11,14 +11,12 @@
     </ul>
 </template>
 <script>
+  import { mapMutations} from 'vuex';
   export default {
     name: 'todo-add-priority',
     props: {
         id:{
             type: Number
-        },
-        task: {
-            type: Object
         }
     },
     data: () => ({
@@ -48,8 +46,13 @@
     }),
     mounted:function(){},
     methods: {
-        choisePriority(id, status) {
-            this.$emit('choisePriority', id, status)
+        ...mapMutations(["addPriority"]),
+        choisePriority(status) {
+            let taskPriority = {
+                id: this.id,
+                priority: status
+            }
+            this.addPriority(taskPriority)
         }
     }
 }
