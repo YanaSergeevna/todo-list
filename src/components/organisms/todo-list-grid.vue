@@ -36,10 +36,6 @@
         data: () => ({
             showResolved: false
         }),
-        mounted() {
-        },
-        methods: {
-        },
         components: {
             "m-list-item": ToDoListItem
         }

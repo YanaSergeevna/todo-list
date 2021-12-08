@@ -6,17 +6,7 @@
 </template>
 <script>
 export default {
-    name: 'todo-item-nav',
-    props: {
-    },
-    data: () => ({
-    }),
-    mounted () {
-    },
-    methods:{
-    },
-    components: {
-    }
+    name: 'todo-item-nav'
 }
 </script>
 <style scoped lang="scss">

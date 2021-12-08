@@ -63,8 +63,6 @@
                 window.location.reload();
             }
         },
-        computed: {
-        },
         components: {
             Datepicker
         },

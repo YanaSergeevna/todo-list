@@ -44,6 +44,15 @@ textarea {
         transform: rotate(-45deg);
     }
 }
+.m-todo-elem.active.hight .m-todo-elem__circle:after {
+    border-color: #F6412D;
+}
+.m-todo-elem.active.medium .m-todo-elem__circle:after {
+    border-color: #FF9800;
+}
+.m-todo-elem.active.low .m-todo-elem__circle:after {
+    border-color: #FFEC19;
+}
 .hight-priority {
     .m-todo-elem__circle {
         border-color: #F6412D;

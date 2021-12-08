@@ -17,9 +17,6 @@
             type: Boolean
         }
     },
-    data: () => ({
-    }),
-    mounted:function(){},
     methods: {
         closePriorityPopup() {
             this.$emit('closePriorityPopup', true)

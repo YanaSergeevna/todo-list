@@ -1,7 +1,7 @@
 <template>
     <li :class="[
             'm-todo-elem',
-            task.done ? 'active' : '',
+            done ? 'active' : '',
             task.priority 
         ]"
         :id="task.id"
@@ -48,10 +48,9 @@
         },
         data: () => ({
             show: true,
-            priorityShow: false
+            priorityShow: false,
+            done: false
         }),
-        mounted:function(){
-        },
         methods: {
             ...mapMutations(["removeTask", "updateTask", "checkTask"]),
             
@@ -70,6 +69,7 @@
                 }
             },
             checkThisTask(e) {
+                this.done = true;
                 let checkedTask = {
                     id: this.task.id,
                     done: true

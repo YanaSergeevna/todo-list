@@ -55,8 +55,6 @@
 
             
         },
-        computed: {
-        },
         components: {
             "m-header": ToDoHeader,
             "o-list-grid": ToDoListGrid,

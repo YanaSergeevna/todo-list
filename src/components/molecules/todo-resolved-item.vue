@@ -42,8 +42,6 @@
             priority: '',
             show: true
         }),
-        mounted:function(){
-        },
         methods: {
             ...mapMutations(["removeTask", "updateTask", "checkTask"]),
             checkThisTask(e) {

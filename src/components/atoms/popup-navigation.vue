@@ -16,18 +16,7 @@
 </template>
 <script>
 export default {
-    name: 'todo-popup-navigation',
-    props: {
-    },
-    data: () => ({
-    }),
-    mounted () {
-
-    },
-    methods:{
-    },
-    components: {
-    }
+    name: 'todo-popup-navigation'
 }
 </script>
 <style scoped lang="scss">
