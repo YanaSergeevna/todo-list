@@ -5,6 +5,7 @@ export default{
     removeTask(state, payload){
         let index = state.todos.findIndex(task => task.id === payload);
         state.todos.splice(index, 1);
+        console.log(state.todos)
     },
     updateTask(state, payload){
         let index = state.todos.findIndex(task => task.id === payload.id);
@@ -13,6 +14,7 @@ export default{
     checkTask(state, payload) {
         let index = state.todos.findIndex(task => task.id === payload.id);
         state.todos[index].done = payload.done
+        console.log(state.todos)
     },
     addPriority(state, payload){
         let index = state.todos.findIndex(task => task.id === payload.id);

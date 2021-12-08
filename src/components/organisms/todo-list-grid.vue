@@ -18,7 +18,7 @@
     
 </template>
 <script>
-    import ToDoListItem from "../atoms/todo-list-item.vue";
+    import ToDoListItem from "../molecules/todo-list-item.vue";
 
     export default {
         name: 'todo-list-grid',

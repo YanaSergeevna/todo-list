@@ -19,9 +19,6 @@ const store = new Vuex.Store({
         allTasks(state) {
             return state.todos.filter(task => task.done === false);
         },
-        allTasksLength(state) {
-            return state.todos.length
-        },
         resolvedTasks(state) {
             return state.todos.filter(task => task.done === true);
         }

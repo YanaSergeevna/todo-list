@@ -4,17 +4,17 @@
                 :selectedMonth="selectedMonth"
                 @calendar="calendar"
             />
-            <m-list-grid
+            <o-list-grid
                 :daysObj="daysObj"
                 :hasToday="hasToday"
                 :selectedMonth="selectedMonth"
-            ></m-list-grid>       
+            ></o-list-grid>       
         </div>
 </template>
 
 <script>
     import ToDoHeader from "./molecules/todo-header.vue";
-    import ToDoListGrid from "./molecules/todo-list-grid.vue";
+    import ToDoListGrid from "./organisms/todo-list-grid.vue";
 
     export default {
         name: "todo-new",
@@ -35,15 +35,13 @@
             calendar(year, month) {
                 let lastDay = new Date(year,month+1,0).getDate(),
                     lastDate = new Date(year,month,lastDay);
-                
 
                 this.selectedMonth = month;
                 this.daysObj = [];
                 this.hasToday =  false;
 
                 for(var  i = 1; i <= lastDay; i++) {
-                    let isoDay = (new Date(year, month, i+1).toISOString());
-                    
+                    let isoDay = (new Date(year, month, i).toISOString());
                     if (i == new Date().getDate() && lastDate.getFullYear() == new Date().getFullYear() && lastDate.getMonth() == new Date().getMonth()) {
                         this.daysObj = [];
                         this.hasToday = true;
@@ -61,7 +59,7 @@
         },
         components: {
             "m-header": ToDoHeader,
-            "m-list-grid": ToDoListGrid,
+            "o-list-grid": ToDoListGrid,
         }
     }
 </script>

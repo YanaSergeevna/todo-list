@@ -10,7 +10,7 @@
   </li>
 </template>
 <script>
-import {mapMutations, mapGetters} from 'vuex';
+import {mapMutations} from 'vuex';
   
 export default {
     name: 'todo-elem',
@@ -28,9 +28,6 @@ export default {
     }),
     mounted() {
         document.querySelector('.field'+this.indexDay).focus()
-    },
-    computed: {
-        ...mapGetters(["allTasksLength"])
     },
     methods: {
         ...mapMutations(["createTask"]),

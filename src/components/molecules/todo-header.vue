@@ -39,11 +39,19 @@
                 this.$nextTick(() => {
                     let year =  this.calendarValue.getFullYear(),
                         month = this.calendarValue.getMonth(),
-                        day = this.calendarValue.getDate();                    
+                        day = this.calendarValue.getDate(),
+                        activeMonth = new Date().getMonth(),
+                        activeDay =  new Date().getDate(),
+                        id = "";
+                        if(activeMonth === month) {
+                            id = `Day${day-activeDay}`
+                        } else {
+                            id = `Day${day-1}`
+                        }
+
                     this.$emit('calendar', year, month);
                      this.$nextTick(() => {
-                        let id = `Day${day-1}`,
-                            element = document.getElementById(id),
+                        let element = document.getElementById(id),
                             container = document.getElementById('scroll-container');
                         container.scrollLeft = 0;
                         let leftPos = element.getBoundingClientRect().left;

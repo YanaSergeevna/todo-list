@@ -1,11 +1,9 @@
 <template>
-<transition name="slide-fade">
     <li :class="[
             'm-todo-elem',
             task.done ? 'active' : '',
             task.priority 
         ]"
-        v-show="!task.done"
         :id="task.id"
         >
         <span class="priority-label"></span>
@@ -33,10 +31,10 @@
             <a-priority-popup 
                 v-if="priorityShow"
                 :id="task.id"
+                :date="task.date"
             />
         </transition>
     </li>
-</transition>
 </template>
 <script>
     import AddPriority from "../atoms/todo-add-priority.vue";
@@ -55,7 +53,8 @@
         mounted:function(){
         },
         methods: {
-             ...mapMutations(["removeTask", "updateTask", "checkTask"]),
+            ...mapMutations(["removeTask", "updateTask", "checkTask"]),
+            
             removeItem() {
                 this.removeTask(this.task.id)
             },
@@ -70,7 +69,7 @@
                     this.updateTask(newValue)
                 }
             },
-            checkThisTask() {
+            checkThisTask(e) {
                 let checkedTask = {
                     id: this.task.id,
                     done: true
@@ -148,7 +147,24 @@
     .m-todo-elem.low .priority-label:before,
     .m-todo-elem.low .priority-label:after {
         background-color: rgb(255, 236, 25);
-
     }
+    .m-todo-elem.hight {
+        .m-todo-elem__circle {
+            border-color: rgb(246, 65, 45);
+        }
+    }
+
+    .m-todo-elem.medium {
+        .m-todo-elem__circle {
+            border-color: rgb(255, 152, 0);
+        }
+    }
+
+    .m-todo-elem.low {
+        .m-todo-elem__circle {
+            border-color: rgb(255, 236, 25);
+        }
+    }
+
     
 </style>

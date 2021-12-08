@@ -5,8 +5,8 @@
     &__thumb-y,
     &__thumb-x {
         right: 0px;
-        width: 6px;
-        background: #012644;
+        width: 6px !important;
+        background: #012644 !important;
     }
     &--active-x > &__rail-x, 
     &--active-y > &__rail-y {
@@ -20,7 +20,7 @@
         border-radius: 10px;
     }
     &__thumb-x {
-        height: 15px;
+        height: 15px!important;
         bottom: 0;
-    }
+    }   
 }
