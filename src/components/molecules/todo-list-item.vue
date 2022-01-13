@@ -9,15 +9,16 @@
       />
       <perfect-scrollbar>
         <div class="a-items-lists">
-
           <draggable
-            :options="{group:'people'}"
             @start="drag=true" 
             @end="drag=false"
             class="list-group"
             @add="onAdd"
+            v-bind="dragOptions"
+            :list="tasksbyDate"
           >
-            <transition-group name="list" 
+            <transition-group 
+              name="list" 
               tag="ul" 
               :data-date="dateIso"
             >
@@ -65,7 +66,7 @@
   import ToDoResolvedElem from "./todo-resolved-item.vue";
   import CreateTodoElem from "./create-todo-elem.vue";
 
-  import { mapGetters, mapMutations, mapState} from 'vuex';
+  import { mapGetters, mapMutations } from 'vuex';
   import draggable from 'vuedraggable'
 
   export default {
@@ -75,7 +76,7 @@
           type: Array
         },
         hasToday: {
-          type: Boolean
+          type: Number
         },
         indexDay: {
           type: Number
@@ -88,10 +89,18 @@
         createItemShow: false,
         tasksbyDate: [],
         resolvedTaskByDate: [],
-        showResolved: false
+        showResolved: true
     }),
     computed: {
-      ...mapGetters(["allTasks", "resolvedTasks"])
+      ...mapGetters(["allTasks", "resolvedTasks"]),
+      dragOptions() {
+        return {
+          animation: 0,
+          group: "tasks",
+          ghostClass: "ghost",
+          animation:150
+        };
+      },
     },
     mounted:function(){
       this.dataProcessing(this.allTasks, false)
@@ -151,7 +160,7 @@
         padding: 10px;
         list-style-type: none;
         background: #6495ed90;
-        width: calc(30% - 30px);
+        width: calc(15% - 30px);
         min-width: 300px;
         flex-shrink: 0;
         margin: 15px;
@@ -202,4 +211,10 @@
     .ps.ps--active-y  {
       padding-right: 16px;
     }
+    .flip-list-move {
+      transition: transform 0.5s;
+    }
+    .no-move {
+      transition: transform 0s;
+}
 </style>

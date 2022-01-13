@@ -5,7 +5,8 @@
                 <m-list-item
                     v-for="(date, index) in daysObj"
                     :key="'Day'+ index"
-                    :id="'Day'+ index"
+                    :id="[
+                    hasToday==index?'todayDay':'Day'+ index]"
                     :dateIso="date"
                     :indexDay="index"
                     :hasToday="hasToday"
@@ -19,6 +20,7 @@
 </template>
 <script>
     import ToDoListItem from "../molecules/todo-list-item.vue";
+    import { mapMutations } from 'vuex';
 
     export default {
         name: 'todo-list-grid',
@@ -27,7 +29,7 @@
                 type: Array
             },
             hasToday: {
-                type: Boolean
+                type: Number
             },
             selectedMonth: {
                 type: Number
@@ -36,6 +38,12 @@
         data: () => ({
             showResolved: false
         }),
+        mounted:function(){
+            this.filterActiveTasks()
+        },
+        methods: {
+            ...mapMutations(["filterActiveTasks"])
+        },
         components: {
             "m-list-item": ToDoListItem
         }
@@ -48,10 +56,11 @@
     .o-todo-month {
         flex: 1;
         width: 100%;
+        padding: 0 15px;
     }
     .m-month-grid {
         width: 100%;
-        height: 100%;
+        min-height: calc(100vh - 59px);
         display: flex;
         justify-content: flex-start;
         align-items: flex-start;

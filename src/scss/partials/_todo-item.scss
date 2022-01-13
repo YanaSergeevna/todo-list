@@ -8,6 +8,7 @@ textarea {
     resize: none;
     overflow: hidden;
     border-bottom: 1px solid transparent;
+    background: transparent;
     &:focus {
         outline: none;
     }
@@ -27,7 +28,7 @@ textarea {
     height: 15px;
     flex-shrink: 0;
     border: 2px solid #cecece;
-    margin: 0 10px 0 0;
+    margin: 3px 10px 0 0;
     cursor: pointer;
 }
 .m-todo-elem.active .m-todo-elem__circle {

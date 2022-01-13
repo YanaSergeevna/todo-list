@@ -24,12 +24,12 @@
                         "August","September","October","November","December"],
                 selectedMonth: null,
                 activeYear: new Date().getFullYear(),
-                hasToday: false,
+                hasToday: -1,
                 daysObj: [],
             }
         },
         mounted () {
-            this.calendar(new Date().getFullYear(),new Date().getMonth());
+            this.calendar(new Date().getFullYear(),new Date().getMonth())
         },
         methods: {
             calendar(year, month) {
@@ -38,13 +38,11 @@
 
                 this.selectedMonth = month;
                 this.daysObj = [];
-                this.hasToday =  false;
 
                 for(var  i = 1; i <= lastDay; i++) {
-                    let isoDay = (new Date(year, month, i).toISOString());
-                    if (i == new Date().getDate() && lastDate.getFullYear() == new Date().getFullYear() && lastDate.getMonth() == new Date().getMonth()) {
-                        this.daysObj = [];
-                        this.hasToday = true;
+                    let isoDay = (new Date(year, month, i+1).toISOString());
+                    if (i == new Date().getDate()) {
+                        this.hasToday = i-1;
                     }
                     let daysObj = [ isoDay ]
                     this.daysObj.push(daysObj)
@@ -67,7 +65,7 @@
     .o-todo-wrapper {
         position: relative;
         width: 100%;
-        height: 100vh;
+        //height: 100vh;
         margin: 0 auto;
         display: flex;
         flex-direction: column;

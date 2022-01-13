@@ -5,22 +5,32 @@
     &__thumb-y,
     &__thumb-x {
         right: 0px;
-        width: 6px !important;
-        background: #012644 !important;
+        //width: 6px !important;
+        background: #ffffff !important;
     }
     &--active-x > &__rail-x, 
     &--active-y > &__rail-y {
-        background-color: #ecf0f590;
-        opacity: .6;
-    }
-    &--active-y > &__rail-y {
-        width: 6px;
+        background-color: #6495ed90;
+        opacity: 1;
     }
     &--active-x > &__rail-x {
+        &:hover, &:focus {
+            background: #6495ed90 !important;
+        }
         border-radius: 10px;
+        border: 1px solid #ffffff50;
     }
+    &__rail-x.ps--clicking {
+        background: #6495ed90 !important;
+    }
+    
     &__thumb-x {
-        height: 15px!important;
+        height: 100% !important;
+        //width: 100px !important;
         bottom: 0;
-    }   
+        opacity: 1 !important;
+    }
+    &--active-y > &__rail-y {
+        width: 6px !important;
+    }
 }

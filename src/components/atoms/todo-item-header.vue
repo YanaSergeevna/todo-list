@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="list-item-header__today" v-if="hasToday && indexDay == 0">
+        <div class="list-item-header__today" v-if="checkTodayDay()">
           Today
         </div>
         <div class="list-item-header__day" v-else>
@@ -30,7 +30,7 @@
           type: Array
         },
         hasToday: {
-          type: Boolean
+          type: Number
         },
         selectedMonth: {
           type: Number
@@ -45,6 +45,7 @@
     methods: {
         dateProcessing() {
             let day = new Date(this.dateIso);
+            day = new Date(day.getTime() - 86400000);
             this.date = day.getDate();
             this.weekDay = this.weekDays[day.getDay()]
         },
@@ -55,7 +56,15 @@
             } else {
                 return actualMonth
             }
-        },        
+        }, 
+        checkTodayDay() {
+          let day = new Date(this.dateIso),
+              today = new Date();
+              day = new Date(day.getTime() - 86400000);
+           if(day.setHours(0,0,0,0) == today.setHours(0,0,0,0)) {
+             return true
+           }
+        }       
     },
     watch: {
       dateIso: function() {

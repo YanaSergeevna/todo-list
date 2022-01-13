@@ -28,6 +28,15 @@
                 calendarValue: new Date()
             }
         },
+        mounted() {
+            this.$nextTick(() => {
+                let element = document.getElementById('todayDay'),
+                    container = document.getElementById('scroll-container');
+                container.scrollLeft = 0;
+                let leftPos = element.getBoundingClientRect().left;
+                container.scrollLeft = leftPos-40;
+            })
+        },
         methods: {
             openDatepicker() {
                 this.$refs.datePicker.showCalendar();
@@ -39,15 +48,8 @@
                 this.$nextTick(() => {
                     let year =  this.calendarValue.getFullYear(),
                         month = this.calendarValue.getMonth(),
-                        day = this.calendarValue.getDate(),
-                        activeMonth = new Date().getMonth(),
-                        activeDay =  new Date().getDate(),
-                        id = "";
-                        if(activeMonth === month) {
-                            id = `Day${day-activeDay}`
-                        } else {
-                            id = `Day${day-1}`
-                        }
+                        day = this.calendarValue.getDate();
+                        let id = `Day${day-1}`
 
                     this.$emit('calendar', year, month);
                      this.$nextTick(() => {
