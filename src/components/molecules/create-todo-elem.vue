@@ -38,7 +38,7 @@ export default {
                     name: newValue, 
                     date: this.dateIso, 
                     done: false, 
-                    priority: "normal" 
+                    priority: 4 
                 }
             if(this.issueContent == '') {
                 this.$emit('showCreateElem', false)

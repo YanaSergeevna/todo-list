@@ -7,6 +7,17 @@
         :selectedMonth="selectedMonth"
         :indexDay="indexDay"
       />
+     
+      <div class="topBar">
+        <a-todo-progress
+          :resolvedTaskByDate="resolvedTaskByDate"
+          :tasksbyDate="tasksbyDate"
+        />
+        <a-todo-sort
+          v-if="tasksbyDate.length > 0"
+          :tasksbyDate="tasksbyDate"
+        />
+      </div>
       <perfect-scrollbar>
         <div class="a-items-lists">
           <draggable
@@ -30,7 +41,6 @@
               />
             </transition-group>
           </draggable>
-
           <transition> 
             <ul>
               <li class="a-resolved-item" 
@@ -62,12 +72,14 @@
 <script>
   import ToDoItemHeader from "../atoms/todo-item-header.vue";
   import ToDoItemNav from "../atoms/todo-item-nav.vue";
+  import ToDoSort from "../atoms/itemTopBar/todo-sort.vue";
+  import ToDoProgress from "../atoms/itemTopBar/todo-progress.vue";
   import ToDoElem from "./todo-elem.vue";
   import ToDoResolvedElem from "./todo-resolved-item.vue";
   import CreateTodoElem from "./create-todo-elem.vue";
+  import draggable from 'vuedraggable'
 
   import { mapGetters, mapMutations } from 'vuex';
-  import draggable from 'vuedraggable'
 
   export default {
     name: 'todo-list-item',
@@ -138,6 +150,8 @@
       'm-create-todo-elem': CreateTodoElem,
       'a-todo-item-header': ToDoItemHeader,
       'a-todo-item-nav':ToDoItemNav,
+      'a-todo-sort':ToDoSort,
+      'a-todo-progress': ToDoProgress,
       draggable
     },
     watch: {
@@ -216,5 +230,11 @@
     }
     .no-move {
       transition: transform 0s;
-}
+    }
+    .topBar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 25px;
+    }
 </style>
