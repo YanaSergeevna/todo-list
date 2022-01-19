@@ -3,7 +3,7 @@
         <li 
             v-for="(item, index) in priorities" 
             :key="'Priority'+index"
-            @click="choisePriority(item.priority)"
+            @click="choisePriority(item.status)"
             :class="['a-priority-item', item.priority]"
         >
         {{item.name}}
@@ -24,22 +24,26 @@
             {
                 name: '!!!',
                 color: '#F6412D',
-                priority: 'hight'
+                priority: 'hight',
+                status: 1
             },
             {
                 name: '!!',
                 color: '#FF9800',
-                priority: 'medium'
+                priority: 'medium',
+                status: 2
             },
             {
                 name: '!!!',
                 color: '#FFEC19',
-                priority: 'low'
+                priority: 'low',
+                status: 3
             },
             {
                 name: '',
                 color: '#cecece',
-                priority: 'normal'
+                priority: 'normal',
+                status: 4
             }
         ]
 

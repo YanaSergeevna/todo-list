@@ -2,7 +2,7 @@
     <li :class="[
             'm-todo-elem',
             done ? 'active' : '',
-            task.priority 
+            priorities[task.priority-1]
         ]"
         :id="task.id"
         >
@@ -49,6 +49,7 @@
         data: () => ({
             show: true,
             priorityShow: false,
+            priorities:['hight', 'medium', 'low', 'normal'],
             done: false
         }),
         methods: {
