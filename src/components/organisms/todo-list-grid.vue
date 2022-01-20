@@ -5,13 +5,15 @@
                 <m-list-item
                     v-for="(date, index) in daysObj"
                     :key="'Day'+ index"
-                    :id="[
-                    hasToday==index?'todayDay':'Day'+ index]"
+                    :id="['Day'+ index]"
                     :dateIso="date"
                     :indexDay="index"
                     :hasToday="hasToday"
                     :selectedMonth="selectedMonth"
-                    class="m-day-item"
+                    :class="[
+                        'm-day-item',
+                        hasToday==index?'todayDay':''
+                    ]"
                 />
             </div>
         </perfect-scrollbar>
