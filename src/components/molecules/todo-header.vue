@@ -30,9 +30,10 @@
         },
         mounted() {
             this.$nextTick(() => {
-                let element = document.getElementById('todayDay'),
+                let element = document.querySelector('.todayDay'),
                     container = document.getElementById('scroll-container');
-                container.scrollLeft = 0;
+                    console.log(element)
+                container.scrollLeft = 0    
                 let leftPos = element.getBoundingClientRect().left;
                 container.scrollLeft = leftPos-40;
             })
@@ -57,7 +58,9 @@
                             container = document.getElementById('scroll-container');
                         container.scrollLeft = 0;
                         let leftPos = element.getBoundingClientRect().left;
-                        container.scrollLeft = leftPos;
+                        console.log(222)
+                        console.log(container)
+                        container.scrollLeft = leftPos-40;
                     })
                 })
             },
